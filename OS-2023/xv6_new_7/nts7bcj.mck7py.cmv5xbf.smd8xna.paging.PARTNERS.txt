@@ -1,0 +1,18 @@
+Nathan Stevenson (nts7bcj)
+- Implemented getpagetableentry
+- Implemented isphysicalpagefree
+- Helped debug isphysicalpagefree
+- Helped debug dumppagetable
+- Attended initial zoom call to discuss plan / steps to implement project
+
+Morgan Kinne (mck7py)
+- Implemented dumppagetable
+- Helped debug dumppagetable
+- Attended initial zoom call to discuss plan / steps to implement project
+
+Kate Van Meter (cmv5xbf)
+- Attended initial zoom call to discuss plan / steps to implement project
+
+Sophia DeCleene (smd8xna)
+- Helped debug isphysicalpagefree
+- Attended initial zoom call to discuss plan / steps to implement project

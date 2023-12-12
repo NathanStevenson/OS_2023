@@ -1,0 +1,26 @@
+Nathan Stevenson (nts7bcj)
+- Peer Programmed PseudoCode
+- Discussed Overview of How to Implement on Zoom Meeting
+- Attend TA Office Hours to fix some hanging issues
+- Debugged two data Races (stopCalled and Queueing issue)
+- Helped implement run_task initial version
+- Implemented Constructor, Submit Task, Wait For Task
+- Peer Programmed Stop in OH as a group
+
+Morgan Kinne (mck7py)
+- Peer Programmed PseudoCode
+- Discussed Overview of How to Implement on Zoom Meeting
+- Attend TA Office Hours to fix some hanging issues
+- Debugged two Data Races (separated out the queue and map locks to prevent deadlock in task_run)
+- Debugged and Recoded run_task to avoid hangs on specific test cases
+- Peer Programmed Stop in OH as a group
+
+Kate Van Meter (cmv5xbf)
+- Peer Programmed PseudoCode
+- Discussed Overview of How to Implement on Zoom Meeting
+- Attend TA Office Hours to fix some hanging issues
+- Peer Programmed Stop in OH as a group
+
+Sophia DeCleene (smd8xna)
+- Peer Programmed PseudoCode
+- Discussed Overview of How to Implement on Zoom Meeting

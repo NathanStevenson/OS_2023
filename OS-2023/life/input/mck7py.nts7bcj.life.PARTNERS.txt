@@ -1,0 +1,16 @@
+Nathan Stevenson nts7bcj
+Description: 
+- Pair programmed:
+    - Thread Simulate Life Function
+    - Debugged Testing Output
+- Helped debug:
+    - beginning of simulate life parallel
+
+Morgan Kinne mck7py
+Description:
+- Pair programmed:
+    - Thread Simulate Life Function
+    - Debugged Testing Output
+- Helped debug:
+    - Created Data for each thread (determined start/end points)
+    - cleaned up the dynamically allocated data

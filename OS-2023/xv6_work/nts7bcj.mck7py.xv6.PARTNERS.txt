@@ -1,0 +1,12 @@
+Nathan Stevenson nts7bcj
+Description: 
+- set up scheduler and random number generator
+- debugged settickets, getprocessinfo, scheduler and random number generator
+- pair-programmed:
+    - debugged scheduler
+
+Morgan Kinne mck7py
+Description:
+- set up settickets, getprocessinfo
+- pair-programmed:
+    - debugged scheduler

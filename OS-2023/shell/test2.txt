@@ -1,0 +1,186 @@
+g++ -Wall -Werror -pedantic -Og -g -std=c++17 -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG   -c -o main.o main.cc
+g++ -Wall -Werror -pedantic -Og -g -std=c++17 -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -o msh main.o
+python3 shell_test.py
+Sanitizer output (main process) for test fork fails:
+  ==764878==LeakSanitizer has encountered a fatal error.
+  ==764878==HINT: For debugging, try setting environment variable LSAN_OPTIONS=verbosity=1:log_threads=1
+  ==764878==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+Sanitizer output (main process) for test pipe in the end without a command is invalid:
+  
+  =================================================================
+  ==765420==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 16 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test fork fails in a pipeline:
+  ==765429==LeakSanitizer has encountered a fatal error.
+  ==765429==HINT: For debugging, try setting environment variable LSAN_OPTIONS=verbosity=1:log_threads=1
+  ==765429==HINT: LeakSanitizer does not work under ptrace (strace, gdb, etc)
+Sanitizer output (main process) for test two command pipeline without arguments:
+  
+  =================================================================
+  ==765430==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 19 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test two command pipeline without arguments, then use output:
+  
+  =================================================================
+  ==765438==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 19 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test two command pipeline without arguments twice:
+  
+  =================================================================
+  ==765445==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 38 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test three command pipeline without arguments (outputs):
+  
+  =================================================================
+  ==765459==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 39 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test three command pipeline without arguments (status codes):
+  
+  =================================================================
+  ==765472==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 39 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test three command pipeline without arguments where order matters (1):
+  
+  =================================================================
+  ==765479==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 39 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test three command pipeline without arguments where order matters (2):
+  
+  =================================================================
+  ==765487==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 39 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test |s without spaces mixed with | with spaces (output):
+  
+  =================================================================
+  ==765497==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 32 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test |s without spaces mixed with | with spaces (exit statuses):
+  
+  =================================================================
+  ==765507==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 32 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test simple pipe output:
+  
+  =================================================================
+  ==765511==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 48 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test simple pipe exit status:
+  
+  =================================================================
+  ==765515==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 48 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test longer pipeline (output):
+  
+  =================================================================
+  ==765519==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 80 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test longer pipeline exit status (all 0s):
+  
+  =================================================================
+  ==765524==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 80 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test pipeline with two exit status 1s and one 0 has 1s:
+  
+  =================================================================
+  ==765535==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 64 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test pipeline with two exit status 1s and one 0 has 0:
+  
+  =================================================================
+  ==765540==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 72 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test 100 pipelines (with limit of 50 open files):
+  
+  =================================================================
+  ==765545==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 3200 byte(s) in 100 object(s) allocated from:
+  [plus 8 more lines, not shown]
+
+
+Failed test 'redirect from operator is invalid'
+Test input:
+  /bin/false < | 
+  exit
+Actual stdout:
+  > > /bin/false exit status: 0
+  > 
+Actual stderr:
+  invalid command
+Expected stdout regular expression pattern: (extra lines allowed)
+  > (?:> |/bin/false.*exit status: 255|/bin/false(?!.*exit status:)\s*:)
+Expected stderr regular expression pattern: (extra lines allowed)
+  .*invalid command.*
+Errors:
+  in stdout: could not find match for pattern [> (?:> |/bin/false.*exit status: 255|/bin/false(?!.*exit status:)\s*:)] in ['> > /bin/false exit status: 0', '> ']
+
+
+
+Sanitizer output (main process) for test large amount of data through pipe:
+  
+  =================================================================
+  ==765757==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 56 byte(s) in 2 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test pipe with redirect at end:
+  
+  =================================================================
+  ==765762==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 19 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test pipe with redirect at beginning:
+  
+  =================================================================
+  ==765767==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 16 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+Sanitizer output (main process) for test pipe with redirect at beginning and end:
+  
+  =================================================================
+  ==765771==ERROR: LeakSanitizer: detected memory leaks
+  
+  Direct leak of 16 byte(s) in 1 object(s) allocated from:
+  [plus 8 more lines, not shown]
+87 tests passed and 1 tests failed.
+---
+Note on interpreting test output patterns:
+All expected values matched against a "regular expression" where:
+    .* means any string (including empty strings)
+    .+ means any string (excluding empty strings)
+    everything is matched case-insensitively
+

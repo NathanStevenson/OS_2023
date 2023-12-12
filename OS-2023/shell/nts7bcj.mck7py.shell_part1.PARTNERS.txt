@@ -1,0 +1,28 @@
+Nathan Stevenson nts7bcj
+Description: 
+- Pair programmed:
+    - I/O redirection
+    - fork and exec commands with no arguments
+    - fork and exec commands with arguments
+    - wait on forked commands and print their exit status
+    - a lot of development and debugging also took place while pair programming
+    - most of the new pipe behavior
+- Helped debug:
+    - I/O Redirection (test cases where redirection was in beginning or middle)
+    - lots of debugging on why there was non-deterministic behavior for commands that had 2+ pipes
+    - a lot of the piping logic for the children
+    - Solved the issue with running commands with 2+ pipes
+
+
+Morgan Kinne mck7py
+Description:
+- Pair programmed:
+    - I/O redirection
+    - fork and exec commands with no arguments
+    - fork and exec commands with arguments
+    - wait on forked commands and print their exit status
+    - a lot of development and debugging also took place while pair programming
+    - most of the new pipe behavior
+- Helped debug:
+    - Went to Office Hours to help debug the non-deterministic issues
+    - Helped debug the error "/bin/false < |"

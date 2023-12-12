@@ -1,0 +1,6 @@
+Ideas for Test Cases:
+- strings on each line up to 40 characters, does it work for single character? or if there are more then 40 characters?
+- what if there is only one line?
+- does tail-remove work for a file with only two lines?
+- don't have to worry abt empty lines --> input should be very simple with no empty lines
+- if there are no lines then return empty

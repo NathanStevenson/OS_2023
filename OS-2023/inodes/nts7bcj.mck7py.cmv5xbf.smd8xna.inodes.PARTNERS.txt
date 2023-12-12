@@ -1,0 +1,33 @@
+Nathan Stevenson (nts7bcj)
+- Wrote file_generator.c to easily generate testing files to examine create/insert/extract working correctly
+- wrote get_free_block, is_inode_extract
+- wrote write_int, read_int
+- wrote is_inode, place_inode, extract_inode_from_data
+- wrote walk_indirect_block, walk_doubly_indirect_block, walk_triply_indirect_block
+- wrote populate_bitmap_inode
+- wrote walk_inodes_insert 
+- peer programmed extract_file
+- wrote is_block_empty
+- worked on get_unused_blocks
+- peer programmed walk_inodes_extract
+- wrote place_indirect_block, place_doubly_indirect_block, place_triply_indirect_block
+- filled in skeleton code for place_file
+- argument handling in main
+- set up create and insert function calls in main
+- debugged extract, create, and insert
+- debugged issues with filesize and was able to generate all 4 of the files with their correct sizes
+- wrote up the README
+
+Morgan Kinne (mck7py)
+- wrote extract_walk_indirect_block
+- wrote extract_walk_doubly_indirect_block
+- wrote extract_walk_triply_indirect_block
+- peer programmed extract_file, finished extract_file
+- peer programmed walk_inodes_extract
+- set up extract function calls in main
+- debugged extract
+
+Kate Van Meter (cmv5xbf)
+
+Sophia DeCleene (smd8xna)
+- worked on get_unused_blocks

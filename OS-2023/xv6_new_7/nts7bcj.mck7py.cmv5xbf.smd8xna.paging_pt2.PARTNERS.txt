@@ -1,0 +1,13 @@
+Nathan Stevenson (nts7bcj)
+- Implemented the trap handler and changed sbrk/growproc
+- Altered copyuvm so that fork only copies pages to the child that have already been allocated
+- Fixed kernel trap by ensuring user/kernel page faults act the same way
+
+Morgan Kinne (mck7py)
+- 
+
+Kate Van Meter (cmv5xbf)
+- 
+
+Sophia DeCleene (smd8xna)
+- Absent medical issues

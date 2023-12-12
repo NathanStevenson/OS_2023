@@ -1,0 +1,7 @@
+Nathan Stevenson nts7bcj
+Description: 
+- pair-programmed adding error handlings
+
+Morgan Kinne mck7py
+Description:
+- pair-programmed adding error handlings

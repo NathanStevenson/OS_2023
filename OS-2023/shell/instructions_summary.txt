@@ -1,0 +1,54 @@
+                                                        SHELL LANGUAGE SUMMARY
+
+Each command has max length of 1000 characters and we need to support ' ' and '\t' for white space
+Well formed command: (0 or 1) input/output redirections (< or >) followed by a word token
+1+ wors which are used to form a command for the exec call
+If we see an input or out redirection operation remove it and the word following and raise a flag for input/output redirection
+
+Malformed COmmands: (output something to stderr): Every command must have one word which isnt a redirection operation, every < or > is followed by a word
+If it has more than one < or > it is malformed. First token may be a redirection operation
+THIS IS A VALID COMMAND LOOKS STRANGE: "< Makefile cat > output.txt"
+
+                                                            RUNNING COMMANDS
+
+1. Running Command in shell (first check if the command is malformed by above requirements)
+2. Check if it is the built-in command (exit)
+3. Forks off a subprocess for the command4. If it is not the first command in the pipeline connects it to stdin (filedes[0]) to the 
+stdout of the previous commadn in the pipeline. 
+4. If it is not the last command in the pipeline connect its stdout filedes[1] to stdin of next command in pipeline
+5. If there is a output redirection ">", reopen filedes[1] to that file, file should be created if it does not exist, truncated otherwise
+6. If input redirection "<" filedes[0] should be reopened to that file
+7. Treat each command as the path of the executable to run (shell does not serch PATH)
+8. If error occurs that prevents running executable after forking, then exit with exit status 255, or to permit printing out a special exit status message
+
+MUST CLOSE FILE DESCRIPTORS USED BETWEEN COMMANDS SO THAT YOU DO NOT RUN OUT OF FILE DESCRIPTORS 
+
+                                                            PRINTING OUT ERRORS
+
+Shell should wait for all commands in the pipeline and output their exit statuses, output them in the order the commands appeared in the pipeline
+If terniated due to a signal print (segfault) print out line of name of program followed by eerror description
+
+Otherwise output name of program and then "exit status: (number)"
+When built-i command 'exit' is passed shell should terminate normally with exit status 0 and leave
+
+Shell should print all error messages to std::stderr (if executable does not exist print an error message containing Command not found)
+If the command is malformed print an error message: "Invalid command"
+
+Misc. Cases to print out error messages for:
+Print out error messages if exec fails for another reason (executable found, but not executed)
+If forking or piping fails for any reason (we cannot have our program crash)
+If OPENing a redirection file fails for any reason
+
+IF MULTIPLE RRORS OCCUR YOU CAN PRINT OUT ANY OR ALL POSSIBLE ERRORS
+
+                                                            TESTING SHELL PROGRAM
+
+There is a supplied "shell_test.py" program, which we can run by running "make test"
+Make test produces a lot of output so redirecting it into a file is probably for the best. There are 88 total tests, and 24 of them test Pipes
+All of these tests are intended to run on the Linux CS Servers
+
+ANY SUBMISSION WITH MEMORY LEAKS WILL NOT GET FULL CREDIT (makefile provided has AddressSanitizer built within it)
+Make sure the code does not hang some of the tests have tie limits
+
+If you are going to write additional tests put them into a file and do "cat file | ./msh"
+Imitate a fork fails test by manually setting a limit on the number of processes that can use something to 1, so that the shell cannot succesfully fork "ulimit -u 1"

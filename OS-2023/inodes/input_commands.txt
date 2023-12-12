@@ -1,0 +1,80 @@
+                                                            TESTING THE CREATE COMMAND
+
+Inode Info:
+- Direct Data Blocks hold 12KB files
+- Direct+Indirect hold 780KB files
+- Direct+Indirect+Doubly hold 66316KB files (66.3MB)
+- Direct+Indirect+Doubly+Triply hold 16,843,532KB files (16.84GB)
+
+
+Extract Command for Assignment: ./disk_image -extract -image ./input_files/laptop_image -u 10578 -g 1231 -o /u/nts7bcj/cs4414/OS-2023/inodes/output_folder
+
+Owners UID: 10578 | Owners GID: 1231
+
+                                            # Test Direct Data Blocks are working for create
+
+(4 data blocks - each block is a character)
+./disk_image -create -image drive -nblocks 13 -iblocks 1 -inputfile ./input_files/a.txt -u 21 -g 31 -block 0 -inodepos 0
+
+(11 data blocks - each block is random nonsense)
+./disk_image -create -image drive -nblocks 13 -iblocks 1 -inputfile ./input_files/11KiB.bin -u 21 -g 31 -block 0 -inodepos 0
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+                                            # Test Indirect Data Blocks are working for create
+
+(13 data blocks required for file data, 1 for inode, 1 for indirect block - 15 total // each block is random nonsense)
+./disk_image -create -image drive -nblocks 15 -iblocks 1 -inputfile ./input_files/13KiB.bin -u 21 -g 31 -block 0 -inodepos 0
+
+(512 data blocks required for file data, 1 for inode, 2 for indirect block - 515 total // each block is random nonsense)
+./disk_image -create -image drive -nblocks 515 -iblocks 1 -inputfile ./input_files/512KiB.bin -u 21 -g 31 -block 0 -inodepos 0
+
+(16 data blocks required for file data, 1 for inode, 1 for indirect block - 18 total // each block is character (a,b,c,d) repeating)
+./disk_image -create -image drive -nblocks 18 -iblocks 1 -inputfile ./input_files/b.txt -u 21 -g 31 -block 0 -inodepos 0
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+                                            # Test Doubly Indirect Data Blocks are working for create
+
+(1024 data blocks, 1 inode, 3 normal indirect, 1 doubly, 1 indirect from doubly - 1030 blocks)
+./disk_image -create -image drive -nblocks 1030 -iblocks 1 -inputfile ./input_files/1MiB.bin -u 21 -g 31 -block 0 -inodepos 0
+
+0 Inode, 1-12 Direct, 13 indirect, 14-269 direct, 270 indirect, 271-526 direct, 527 indirect, 528-783 direct, 784 doubly, 785 indirect, 786-1029 direct
+
+(1000 data blocks, 1 inode, 3 normal indirect, 1 doubly, 1 indirect from doubly - 1006 blocks)
+./disk_image -create -image drive -nblocks 1006 -iblocks 1 -inputfile ./input_files/double_test.txt -u 21 -g 31 -block 0 -inodepos 0
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+                                            # Test Triply Indirect Data Blocks are working for create
+
+(67000 data blocks, 1 inode, 3 normal indirect, 1 doubly, 256 indirect from doubly, 1 triply, 1 doubly from triply, 3 indirect from triply from double --- 67266 total blocks)
+./disk_image -create -image drive -nblocks 67266 -iblocks 1 -inputfile ./input_files/triple_test.txt -u 21 -g 31 -block 0 -inodepos 0
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+                                                        TESTING THE INSERT COMMAND
+
+./disk_image -insert -image drive -nblocks 13 -iblocks 1 -inputfile ./input_files/a.txt -u 21 -g 31 -block 0 -inodepos 1
+
+
+
+
+                                                        TESTING THE EXTRACT COMMAND
+
+// change the path to match the path on your machine. cd into the output_folder and run the command "pwd" to get the absolute path 
+
+(simple test)
+./disk_image -extract -image drive -u 21 -g 31 -o /u/nts7bcj/cs4414/OS-2023/inodes/output_folder
+
+
+more complicated
+-------------------------------------
+(create drive)
+1. ./disk_image -create -image drive -nblocks 2500 -iblocks 1 -inputfile ./input_files/double_test.txt -u 21 -g 31 -block 0 -inodepos 0
+(insert drive with short file of chars)
+2. ./disk_image -insert -image drive -nblocks 2500 -iblocks 1 -inputfile ./input_files/a.txt -u 21 -g 31 -block 0 -inodepos 1
+(insert drive with another big file like in create)
+3. ./disk_image -insert -image drive -nblocks 2500 -iblocks 1 -inputfile ./input_files/double_test.txt -u 21 -g 31 -block 0 -inodepos 2
+(hopefully extract the three files in the drive)
+4. ./disk_image -extract -image drive -u 21 -g 31 -o /u/nts7bcj/cs4414/OS-2023/inodes/output_folder

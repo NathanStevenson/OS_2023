@@ -1,0 +1,29 @@
+Nathan Stevenson nts7bcj
+Description: 
+- Wrote
+    - Threadpool Constructor, Consumer func (run_task), SubmitTask, WaitForTask, and Stop
+- Debugged
+    - Threadpool Constructor, Consumer func (run_task), SubmitTask, WaitForTask, and Stop
+    - Issues with data races and deadlocking
+- Pair-programmed
+    - beginning logic on task and threadpool constructor, header file contents
+
+
+Morgan Kinne mck7py
+Description:
+- Pair-programmed
+    - beginning logic on task and threadpool constructor, header file contents
+- Debugged
+    - Consumer func (run_task), and Stop
+    - deadlocking and data race issues
+
+Kate Van Meter cmv5xbf
+Description:
+- Pair-programmed
+    - beginning logic on task and threadpool constructor, header file contents
+    - Office hours debugging a deadlock issue
+
+Sophia Decleene smd8xna
+Description:
+- Pair-programmed
+    - beginning logic on task and threadpool constructor, header file contents

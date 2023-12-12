@@ -1,0 +1,8 @@
+Nathan Stevenson (nts7bcj)
+- Completed original assignment together
+- Discussed potential issues with original solution why only works for even #
+- Got threads to work on odd # of iterations and fixed address sanitizer issue 
+
+Morgan Kinne (mck7py)
+- Completed original assignment together
+- Discussed potential issues with original solution why only works for even #
